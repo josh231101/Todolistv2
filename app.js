@@ -71,7 +71,6 @@ app.post("/delete",function(req,res){
       else{res.redirect("/" + nameOfList)}
     })
   }
-
   //OTHER WAY
   // Item.findByIdAndRemove(itemChecked,function(err){...})
 
