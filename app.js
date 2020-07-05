@@ -54,16 +54,13 @@ app.post("/",function(req,res){
     name : itemName
   });
   newItem.save();
-  console.log("Element saved! ");
   res.redirect("/")
 });
 
 app.post("/delete",function(req,res){
   const nameOfList = req.body.nameOfList
-  console.log(nameOfList);
   const itemChecked = req.body.checkbox;
   if(nameOfList === "Today"){
-    console.log(req.body.checkbox);
     Item.deleteOne({_id: itemChecked},function(err){
       if(err){console.log(err);}
       else{res.redirect("/")}
@@ -88,7 +85,6 @@ const List = mongoose.model("List",listSchema)
 
 app.get("/:customListName",function(req,res){
   const customListName = _.capitalize(req.params.customListName)
-  console.log(customListName);
 
   List.findOne({name : customListName},function(err,foundList){
     if(!err){
