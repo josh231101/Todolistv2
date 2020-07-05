@@ -28,11 +28,7 @@ const item3 = new Item({
   name : "<--Click to delete"
 })
 const defaultItems = [item1,item2,item3]
-const listSchema = {
-  name : String,
-  items : [itemsSchema]
-}
-const List = mongoose.model("List",listSchema)
+
 
 app.get("/",function(req,res){
   Item.find(function(e,items){
@@ -84,6 +80,11 @@ app.post("/delete",function(req,res){
 
 })
 
+const listSchema = {
+  name : String,
+  items : [itemsSchema]
+}
+const List = mongoose.model("List",listSchema)
 
 app.get("/:customListName",function(req,res){
   const customListName = _.capitalize(req.params.customListName)
@@ -130,10 +131,6 @@ app.post("/:customListName",function(req,res){
   //   foundList.save()
   //   //redirect thing
   // })
-})
-
-app.get("/about",function(req,res){
-  res.render("about")
 })
 
 app.listen(8080,function(){
