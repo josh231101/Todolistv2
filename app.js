@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"))
 
 //Connect to todolistDB
-mongoose.connect("mongodb://localhost:27017/todolistDB",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://admin-josue:Test123@cluster0.usnm4.mongodb.net/todolistDB",{ useNewUrlParser: true });
 
 //First _schema_ then _model_
 const itemsSchema = {
@@ -98,7 +98,6 @@ app.get("/:customListName",function(req,res){
       }
       else{
         //SHOW THE EXISTING LIST
-        console.log("Exists");
         res.render("lists",{
           listTitle : foundList.name,
           newListItems : foundList.items,
@@ -112,11 +111,9 @@ app.get("/:customListName",function(req,res){
 app.post("/:customListName",function(req,res){
   const listName = req.params.customListName;
   const newTask = req.body.task;
-  console.log(req.params.customListName);
   const newItem = new Item({
     name : newTask
   })
-  console.log(newItem.name);
   List.updateOne({name : listName},{$push : {items : newItem}},function(err){
     if(!err){ res.redirect("/" + listName) }else{console.log(err);}
   })
@@ -127,7 +124,11 @@ app.post("/:customListName",function(req,res){
   //   //redirect thing
   // })
 })
+let port = process.env.PORT;
+if(port == null || port == ""){
+  port = 3000
+}
 
-app.listen(8080,function(){
-  console.log("Server running on port 8080");
+app.listen(port,function(){
+  console.log("Running succesfully");
 });

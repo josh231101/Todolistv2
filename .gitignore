@@ -1,3 +1,5 @@
 #IGNORING NODE MODULES USE NPM I TO USE THE CORRESPONDING DEPENDENCIES
-/node_modules/
-node_modules
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
